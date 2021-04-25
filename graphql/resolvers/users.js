@@ -13,7 +13,8 @@ module.exports = {
     ) {
       //TODO: Validate user data
       //TODO: Make sure user doesn´t already exist
-      //TODO: hash password and create an auth token
+
+      //hash password and create an auth token
       password = await bcrypt.hash(password, 12);
       const newUser = new User({
         username,
@@ -22,7 +23,7 @@ module.exports = {
         createdAt: new Date().toISOString(),
       });
 
-      const res = newUser.save();
+      const res = await newUser.save();
 
       //Create a token for the new user
       const token = jwt.sign(
@@ -34,6 +35,11 @@ module.exports = {
         SECRET_KEY,
         { expiresIn: "1h" }
       );
+      return {
+        ...res._doc,
+        id: res._id,
+        token,
+      };
     },
   },
 };
