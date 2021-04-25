@@ -1,6 +1,7 @@
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { SECRET_KEY } = require("../../config");
 
 module.exports = {
   Mutation: {
@@ -20,6 +21,19 @@ module.exports = {
         password,
         createdAt: new Date().toISOString(),
       });
+
+      const res = newUser.save();
+
+      //Create a token for the new user
+      const token = jwt.sign(
+        {
+          id: res.id,
+          email: res.email,
+          username: res.username,
+        },
+        SECRET_KEY,
+        { expiresIn: "1h" }
+      );
     },
   },
 };
