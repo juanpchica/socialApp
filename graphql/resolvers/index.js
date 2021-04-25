@@ -1,7 +1,7 @@
 const postsResolvers = require("./posts");
-const usersResolver = require("./users");
+const usersResolvers = require("./users");
 
 module.exports = {
   Query: { ...postsResolvers.Query },
-  Mutation: { ...usersResolver.Mutation },
+  Mutation: { ...usersResolvers.Mutation, ...postsResolvers.Mutation },
 };
