@@ -1,45 +1,43 @@
-import React, { Component } from "react";
-import { Menu, Segment } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu } from "semantic-ui-react";
 
-export default class MenuExampleSecondaryPointing extends Component {
-  state = { activeItem: "home" };
+function Navbar() {
+  const handleItemClick = (e, { name }) => setActiveItem(name);
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  const pathname = window.location.pathname;
 
-  render() {
-    const { activeItem } = this.state;
+  const path = pathname === "/" ? "home" : pathname.substr(1);
+  const [activeItem, setActiveItem] = useState(path);
 
-    return (
-      <div>
-        <Menu pointing secondary>
-          <Menu.Item
-            name="home"
-            active={activeItem === "home"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="messages"
-            active={activeItem === "messages"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="friends"
-            active={activeItem === "friends"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Menu position="right">
-            <Menu.Item
-              name="logout"
-              active={activeItem === "logout"}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu>
+  return (
+    <Menu pointing secondary size="massive" color="teal">
+      <Menu.Item
+        name="home"
+        active={activeItem === "home"}
+        onClick={handleItemClick}
+        as={Link}
+        to="/"
+      />
 
-        <Segment>
-          <img src="/images/wireframe/media-paragraph.png" />
-        </Segment>
-      </div>
-    );
-  }
+      <Menu.Menu position="right">
+        <Menu.Item
+          name="login"
+          active={activeItem === "login"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/login"
+        />
+        <Menu.Item
+          name="register"
+          active={activeItem === "register"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/register"
+        />
+      </Menu.Menu>
+    </Menu>
+  );
 }
+
+export default Navbar;
