@@ -26,11 +26,9 @@ const Home = () => {
       }
     }
   `;
-  const {
-    loading,
-    error,
-    data: { getPosts: posts },
-  } = useQuery(FETCH_POSTS_QUERY);
+  const { loading, error, data: { getPosts: posts } = {} } = useQuery(
+    FETCH_POSTS_QUERY
+  );
 
   return (
     <Grid columns={3}>
