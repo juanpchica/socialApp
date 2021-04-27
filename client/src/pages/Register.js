@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 const Register = () => {
   const [values, setValues] = useState({
     username: "",
@@ -9,22 +9,25 @@ const Register = () => {
   });
 
   const onChange = (event) => {
-    setValues({ ...values, [event.target.name]: [event.target.value] });
+    setValues({ ...values, [event.target.name]: event.target.value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
   };
 
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Form.Input
         label="Username"
         placeholder="Username..."
         name="username"
-        type="text"
-        value={values.name}
+        value={values.username}
         onChange={onChange}
       />
       <Form.Input
         label="Email"
-        type="email"
         name="email"
         placeholder="Email..."
         value={values.email}
@@ -32,7 +35,6 @@ const Register = () => {
       />
       <Form.Input
         label="Password"
-        type="password"
         name="password"
         placeholder="Password..."
         value={values.password}
@@ -40,12 +42,12 @@ const Register = () => {
       />
       <Form.Input
         label="Confirm Password"
-        type="password"
-        name="confirmpassword"
+        name="confirmPassword"
         placeholder="Confirm Password..."
-        value={values.name}
+        value={values.confirmPassword}
         onChange={onChange}
       />
+      <Button type="submit">Sign Up</Button>
     </Form>
   );
 };
