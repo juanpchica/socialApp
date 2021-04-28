@@ -21,6 +21,9 @@ function PostForm() {
         data: {
           getPosts: [result.data.createPost, ...data.getPosts],
         },
+        onError(err) {
+          return err;
+        },
       });
       values.body = "";
     },
@@ -50,7 +53,7 @@ function PostForm() {
       {error && (
         <div className="ui error message" style={{ marginBottom: 20 }}>
           <ul className="list">
-            <li>{error}</li>
+            <li>{error.graphQLErrors[0].message}</li>
           </ul>
         </div>
       )}
