@@ -6,30 +6,12 @@ import PostCard from "../components/PostCard";
 
 import { AuthContext } from "../context/auth";
 import PostForm from "../components/PostForm";
+
+import { FETCH_POSTS_QUERY } from "../utils/graphql";
+
 const Home = () => {
   const { user } = useContext(AuthContext);
 
-  const FETCH_POSTS_QUERY = gql`
-    {
-      getPosts {
-        id
-        body
-        createdAt
-        username
-        likeCount
-        likes {
-          username
-        }
-        commentCount
-        comments {
-          id
-          username
-          createdAt
-          body
-        }
-      }
-    }
-  `;
   const { loading, error, data: { getPosts: posts } = {} } = useQuery(
     FETCH_POSTS_QUERY
   );

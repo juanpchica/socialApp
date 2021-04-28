@@ -17,9 +17,7 @@ const PostCard = ({
         />
         <Card.Header>{username}</Card.Header>
         <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
-        <Card.Description>
-          Steve wants to add you to the group <strong>best friends</strong>
-        </Card.Description>
+        <Card.Description>{body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <div className="ui two buttons">
