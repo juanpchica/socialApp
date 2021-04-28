@@ -5,7 +5,10 @@ import { Grid } from "semantic-ui-react";
 import PostCard from "../components/PostCard";
 
 import { AuthContext } from "../context/auth";
+import PostForm from "../components/PostForm";
 const Home = () => {
+  const { user } = useContext(AuthContext);
+
   const FETCH_POSTS_QUERY = gql`
     {
       getPosts {
@@ -36,6 +39,11 @@ const Home = () => {
         <h1>Recent Posts</h1>
       </Grid.Row>
       <Grid.Row>
+        {user && (
+          <Grid.Column>
+            <PostForm />
+          </Grid.Column>
+        )}
         {loading ? (
           <h1>Loading posts..</h1>
         ) : (
