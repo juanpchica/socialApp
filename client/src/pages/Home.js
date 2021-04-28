@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 import { Grid, Transition } from "semantic-ui-react";
 import PostCard from "../components/PostCard";
@@ -12,7 +12,7 @@ import { FETCH_POSTS_QUERY } from "../utils/graphql";
 const Home = () => {
   const { user } = useContext(AuthContext);
 
-  const { loading, error, data: { getPosts: posts } = {} } = useQuery(
+  const { loading, data: { getPosts: posts } = {} } = useQuery(
     FETCH_POSTS_QUERY
   );
   return (

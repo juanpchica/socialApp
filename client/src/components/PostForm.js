@@ -21,11 +21,11 @@ function PostForm() {
         data: {
           getPosts: [result.data.createPost, ...data.getPosts],
         },
-        onError(err) {
-          return err;
-        },
       });
       values.body = "";
+    },
+    onError(err) {
+      return err;
     },
   });
 
