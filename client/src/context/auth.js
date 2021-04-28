@@ -1,10 +1,52 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
-const AuthContext = React.createContext();
+const initialState = {
+  user: null,
+};
+
+const AuthContext = React.createContext({
+  user: null,
+  login: (userData) => {},
+  logout: () => {},
+});
+
+function authReducer(state, action) {
+  switch (action.type) {
+    case "LOGIN":
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        user: null,
+      };
+    default:
+      return state;
+  }
+}
 
 const AuthProvider = (props) => {
-  const [prueba, setPrueba] = useState("probando");
-  return <AuthContext.Provider value={prueba} {...props} />;
+  const [state, dispatch] = useReducer(authReducer, initialState);
+
+  function login(userData) {
+    dispatch({
+      type: "LOGIN",
+      payload: userData,
+    });
+  }
+
+  function logout() {
+    dispatch({ type: "LOGOUT" });
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{ user: state.user, login, logout }}
+      {...props}
+    />
+  );
 };
 
 export { AuthProvider, AuthContext };

@@ -30,8 +30,6 @@ const Home = () => {
   const { loading, error, data: { getPosts: posts } = {} } = useQuery(
     FETCH_POSTS_QUERY
   );
-  const prueba = useContext(AuthContext);
-  console.log(prueba);
   return (
     <Grid columns={3}>
       <Grid.Row className="page-title">
