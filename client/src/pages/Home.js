@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 import { Grid } from "semantic-ui-react";
 import PostCard from "../components/PostCard";
 
+import { AuthContext } from "../context/auth";
 const Home = () => {
   const FETCH_POSTS_QUERY = gql`
     {
@@ -29,7 +30,8 @@ const Home = () => {
   const { loading, error, data: { getPosts: posts } = {} } = useQuery(
     FETCH_POSTS_QUERY
   );
-
+  const prueba = useContext(AuthContext);
+  console.log(prueba);
   return (
     <Grid columns={3}>
       <Grid.Row className="page-title">
