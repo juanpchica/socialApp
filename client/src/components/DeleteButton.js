@@ -8,8 +8,20 @@ const DeleteButton = ({ postId, callback }) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   const [deletePostOrMutation] = useMutation(DELETE_POST_MUTATION, {
-    update() {
+    update(proxy) {
       setConfirmOpen(false);
+      const data = proxy.readQuery({
+        query: FETCH_POSTS_QUERY,
+      });
+
+      proxy.writeQuery({
+        query: FETCH_POSTS_QUERY,
+        data: {
+          getPosts: data.getPosts.filter((p) => p.id !== postId),
+        },
+      });
+
+      if (callback) callback();
     },
     variables: {
       postId,
