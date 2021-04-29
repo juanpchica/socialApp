@@ -10,6 +10,7 @@ import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import { AuthProvider } from "./context/auth";
 import AuthRoute from "./utils/AuthRoute";
+import SinglePost from "./pages/SinglePost";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <AuthRoute path="/login" component={Login} />
           <AuthRoute path="/register" component={Register} />
+          <Route exact path="/posts/:postId" component={SinglePost} />
         </Container>
       </Router>
     </AuthProvider>
