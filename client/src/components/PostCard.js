@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Card, Image, Button, Icon, Label } from "semantic-ui-react";
 import { AuthContext } from "../context/auth";
 import LikeButton from "../components/LikeButton";
+import DeleteButton from "./DeleteButton";
 const PostCard = ({
   post: { body, createdAt, id, username, likeCount, commentCount, likes },
 }) => {
@@ -34,9 +35,7 @@ const PostCard = ({
               {commentCount}
             </Label>
           </Button>
-          <Button as="div" color="red" floated="right">
-            <Icon name="trash" style={{ margin: 0 }} />
-          </Button>
+          {user && user.username === username && <DeleteButton postId={id} />}
         </div>
       </Card.Content>
     </Card>
