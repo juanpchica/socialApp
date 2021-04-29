@@ -15,7 +15,6 @@
     "bcryptjs": "^2.4.3",
     "graphql": "^15.5.0",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.29.1",
     "mongoose": "^5.12.5"
   },
   "devDependencies": {
