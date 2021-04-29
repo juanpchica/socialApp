@@ -21,20 +21,8 @@ const PostCard = ({
       </Card.Content>
       <Card.Content extra>
         <div className="ui two buttons">
-          <Button
-            as={Link}
-            to={`/posts/${id}`}
-            labelPosition="left"
-            style={{ paddingRight: 25 }}
-          >
-            <Button color="red">
-              <Icon name="heart" />
-              Like
-            </Button>
-            <Label basic color="red" pointing="left">
-              {likeCount}
-            </Label>
-          </Button>
+          <LikeButton user={user} post={{ id, likes, likeCount }} />
+
           <Button as={Link} to={`/posts/${id}`} labelPosition="right">
             <Button basic color="blue">
               <Icon name="comments" />
@@ -43,6 +31,9 @@ const PostCard = ({
             <Label basic color="blue" pointing="left">
               {commentCount}
             </Label>
+          </Button>
+          <Button as="div" color="red" floated="right">
+            <Icon name="trash" style={{ margin: 0 }} />
           </Button>
         </div>
       </Card.Content>
