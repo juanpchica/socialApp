@@ -1,7 +1,8 @@
+import { Popup } from "semantic-ui-react";
 import React from "react";
 
-const MyPopup = () => {
-  return <div>popup</div>;
+const MyPopup = ({ content, children }) => {
+  return <Popup inverted content={content} trigger={children} />;
 };
 
 export default MyPopup;
